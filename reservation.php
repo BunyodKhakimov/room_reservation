@@ -6,6 +6,7 @@ include "is_empty.php";
 include "create_reservation.php";
 include "send_mail.php";
 include "send_message.php";
+include "print_slots.php";
 
 $room = null;
 $date = null;
@@ -59,7 +60,7 @@ function input_room_data()
     $room = htmlspecialchars(trim(fgets(STDIN)));
     fwrite(STDOUT, "Please enter date (e.g. 2022-12-31): ");
     $date = htmlspecialchars(trim(fgets(STDIN)));
-    // print slots
+    print_slots();
     fwrite(STDOUT, "Choose time slot from above (e.g. 5): ");
     $slot = htmlspecialchars(trim(fgets(STDIN)));
 }
