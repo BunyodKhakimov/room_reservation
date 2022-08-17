@@ -5,9 +5,10 @@ function create_reservation($room, $date, $slot, $name, $email, $phone)
     $servername = "127.0.0.1";
     $username = "root";
     $password = "";
+    $dbname = "room_reservation";
 
     try {
-        $conn = new PDO("mysql:host=$servername;dbname=room_reservation_bd", $username, $password);
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 
         $stmt = $conn->prepare("INSERT INTO reservations (name, email, phone, room, date, slot) 
             VALUES (:name, :email, :phone, :room, :date, :slot)");
