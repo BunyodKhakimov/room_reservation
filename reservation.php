@@ -1,10 +1,14 @@
 <?php
 
 include "is_empty.php";
+include "create_reservation.php";
 
 $room = null;
 $date = null;
 $slot = null;
+$name = null;
+$email = null;
+$phone = null;
 
 if ($argc < 2) {
     fwrite(STDOUT, "Welcome to Room Reservation App!" . "\n");
@@ -20,11 +24,15 @@ if ($argc < 2) {
             }
             break;
         case 'makeReservation':
-            // input room data
-            // check available
-            // input user data
-            // send mail
-            // send message
+            input_room_data();
+            if (is_empty($room, $date, $slot)) {
+                input_user_data();
+                create_reservation($room, $date, $slot, $name, $email, $phone);
+                // send mail
+                // send message
+            } else {
+                fwrite(STDOUT, "Room $room for $date and $slot time slot is reserved" . "\n");
+            }
             break;
         default:
             fwrite(STDOUT, "Command not supported!" . "\n");
@@ -50,4 +58,15 @@ function input_room_data()
     // print slots
     fwrite(STDOUT, "Choose time slot from above (e.g. 5): ");
     $slot = htmlspecialchars(trim(fgets(STDIN)));
+}
+
+function input_user_data()
+{
+    global $name, $email, $phone;
+    fwrite(STDOUT, "Please enter your name: ");
+    $name = htmlspecialchars(trim(fgets(STDIN)));
+    fwrite(STDOUT, "Please enter your email: ");
+    $email = htmlspecialchars(trim(fgets(STDIN)));
+    fwrite(STDOUT, "Please enter your phone: ");
+    $phone = htmlspecialchars(trim(fgets(STDIN)));
 }
