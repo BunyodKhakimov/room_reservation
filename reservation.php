@@ -7,6 +7,7 @@ include "create_reservation.php";
 include "send_mail.php";
 include "send_message.php";
 include "print_slots.php";
+include "validation.php";
 
 $room = null;
 $date = null;
@@ -56,22 +57,33 @@ function write_available_commands()
 function input_room_data()
 {
     global $room, $date, $slot;
+
     fwrite(STDOUT, "Enter room number (1-5): ");
     $room = htmlspecialchars(trim(fgets(STDIN)));
+    $room = validate($room);
+
     fwrite(STDOUT, "Please enter date (e.g. 2022-12-31): ");
     $date = htmlspecialchars(trim(fgets(STDIN)));
+    $date = validate($date);
+
     print_slots();
     fwrite(STDOUT, "Choose time slot from above (e.g. 5): ");
     $slot = htmlspecialchars(trim(fgets(STDIN)));
+    $slot = validate($slot);
 }
 
 function input_user_data()
 {
     global $name, $email, $phone;
+
     fwrite(STDOUT, "Please enter your name: ");
     $name = htmlspecialchars(trim(fgets(STDIN)));
+
     fwrite(STDOUT, "Please enter your email: ");
     $email = htmlspecialchars(trim(fgets(STDIN)));
+    $email = validate($email);
+
     fwrite(STDOUT, "Please enter your phone: ");
     $phone = htmlspecialchars(trim(fgets(STDIN)));
+    $phone = validate($phone);
 }
