@@ -1,8 +1,11 @@
 <?php
 
+require 'vendor/autoload.php';
+
 include "is_empty.php";
 include "create_reservation.php";
 include "send_mail.php";
+include "send_message.php";
 
 $room = null;
 $date = null;
@@ -30,7 +33,7 @@ if ($argc < 2) {
                 input_user_data();
                 create_reservation($room, $date, $slot, $name, $email, $phone);
                 send_mail($room, $date, $slot, $name, $email);
-                // send message
+                send_message($room, $date, $slot, $name, $phone);
             } else {
                 fwrite(STDOUT, "Room $room for $date and $slot time slot is reserved" . "\n");
             }
