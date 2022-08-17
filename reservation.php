@@ -2,6 +2,7 @@
 
 include "is_empty.php";
 include "create_reservation.php";
+include "send_mail.php";
 
 $room = null;
 $date = null;
@@ -28,7 +29,7 @@ if ($argc < 2) {
             if (is_empty($room, $date, $slot)) {
                 input_user_data();
                 create_reservation($room, $date, $slot, $name, $email, $phone);
-                // send mail
+                send_mail($room, $date, $slot, $name, $email);
                 // send message
             } else {
                 fwrite(STDOUT, "Room $room for $date and $slot time slot is reserved" . "\n");

@@ -2,6 +2,9 @@
 
 use SendGrid\Mail\Mail;
 
+$dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__);
+$dotenv->load();
+
 function send_mail($room, $date, $slot, $name, $to)
 {
     $from = "b.khakimov@student.inha.uz";
